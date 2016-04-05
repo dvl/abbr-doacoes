@@ -231,6 +231,7 @@ LOGGING = {
 
 
 # MundiPagg
+# http://docs.mundipagg.com/
 
 MUNDIPAGG_API_ENDPOINT = config('MUNDIPAGG_API_ENDPOINT', default='https://sandbox.mundipaggone.com/')
 MUNDIPAGG_API_KEY = config('MUNDIPAGG_API_KEY', default='076550d2-b27e-4d88-8bda-a5115f6591d6')
