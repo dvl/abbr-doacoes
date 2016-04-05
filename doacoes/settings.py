@@ -99,7 +99,7 @@ DEBUG_TOOLBAR_CONFIG = {
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-DATABASES = {'default': config('DATABASE_URL', cast=db_url, default='sqlite://db.sqlite3')}
+DATABASES = {'default': config('DATABASE_URL', cast=db_url, default='sqlite:///db.sqlite3')}
 
 
 # Password validation
