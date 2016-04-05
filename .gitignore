@@ -1,0 +1,15 @@
+*.pyc
+*.sqlite3
+
+bower_components/
+media-root/
+node_modules/
+static-root/
+_build/
+
+.env
+.venv
+npm-debug.log
+
+.coverage
+htmlcov/
