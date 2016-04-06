@@ -134,20 +134,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# AWS
-# https://boto3.readthedocs.org/en/latest/
-
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='123')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='123')
-
-AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME', default='doacoes')
-
-AWS_S3_CUSTOM_DOMAIN = config('AWS_S3_CUSTOM_DOMAIN', default='s3.amazonaws.com/doacoes')
-
-AWS_PRELOAD_METADATA = True
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
