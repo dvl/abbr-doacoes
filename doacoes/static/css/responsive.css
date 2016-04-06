@@ -1,0 +1,124 @@
+/* lg */ 
+@media (min-width: 1400px) {
+	
+}
+
+/* md */
+@media (min-width: 992px) and (max-width: 1199px) {
+	.donate-tab .payment-method ul li {
+		margin: 0 5px;
+	}
+	.gallery-content:hover .photo-info a{	
+		margin-top:15px;
+	}
+	#support-us ul li {
+		margin:0;
+	}
+}
+
+/* sm */
+@media (min-width: 768px) and (max-width: 991px) {
+	.donate-tab .payment-method ul li {
+		margin: 15px 10px;
+	}
+	#support-us ul li {
+		margin: 15px 25px;
+	}
+	.gallery-content:hover .photo-info a{	
+		margin-top:20px;
+	}
+}
+
+
+/* xs */
+@media (max-width: 767px) {
+	h1 {
+		font-size:28px;
+	}
+	h2{
+		font-size:20px;
+	}
+	h3{
+		font-size:16px;
+	}
+	.padding {
+		padding: 40px 0px;
+	}
+	.section-title {
+		margin-bottom:30px;
+		font-size:14px;
+	}
+	.section-title h1{
+		font-size:25px;
+	}
+	.main-slider .slider-content {
+		font-size:16px;
+		padding-top:100px;
+	}
+	.main-slider .slider-content h1 {
+		font-size:36px;
+	}
+	
+	.main-slider .slider-content .btn-primary {
+		margin-bottom:65px;
+	}
+	.donate-tab .tab-list {
+		margin-bottom: 35px;
+	}
+	.donate-tab .tab-list li a {
+		font-size:15px;
+		margin-bottom:10px;
+	}
+	.donate-tab .payment-method ul li {
+		margin: 10px 5px;
+	}
+	#video-section .video-content {
+		padding: 120px 0;
+	}
+	#video-section .video-content a{
+		font-size:85px;
+	}
+	#who-we-are .company-logo {
+		padding:0 15px;
+	}
+	#support-us {
+		padding: 50px 0;
+	}
+	#support-us ul li {
+		margin: 5px 10px;
+	}
+	#photo-gallery .col-sm-3{
+		width:50%;
+		float:left;
+	}
+	.gallery-content:hover .photo-info a{	
+		margin-top:25px;
+	}
+	.contact-content .contact-info {
+		margin-bottom:30px;
+	}
+	#contact-us .contact-form {
+		padding-top: 50px;
+		padding-bottom: 40px;
+	}
+	#gmap {
+		height: 350px;
+	}
+	#footer-bottom {
+		padding: 30px 0px 20px;
+	}
+	
+	
+}
+
+/* XS Portrait */
+@media (max-width: 479px) {
+	#photo-gallery .col-sm-3{
+		width:50%;
+		float:left;
+	}
+	.gallery-content:hover .photo-info a{	
+		margin-top:10px;
+	}
+}
+
