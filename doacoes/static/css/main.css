@@ -522,6 +522,11 @@ input#amount {
   margin:0 15px;
 }
 
+.donate-tab .payment-method ul li img {
+  max-width: 106px;
+  max-height: 65px;
+}
+
 .donate-tab .btn-primary {
   padding:12px 55px;
 }
