@@ -49,10 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 3rd
-    'compressor',
     'debug_toolbar',
     'django_extensions',
-    'storages',
     # Project
     'doacoes.core',
 ]
@@ -67,6 +65,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
@@ -165,7 +164,7 @@ STATICFILES_FINDERS = [
 ]
 
 STATICFILES_DIRS = [
-    str(BASE_DIR / 'bower_components'),
+    # str(BASE_DIR / 'bower_components'),
     str(BASE_DIR / 'doacoes' / 'static'),
 ]
 
@@ -174,28 +173,6 @@ MEDIA_ROOT = str(BASE_DIR / 'media-root')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = str(BASE_DIR / 'static-root')
-
-
-# Django-compressor
-# https://django-compressor.readthedocs.org/en/latest/
-
-COMPRESS_PRECOMPILERS = [
-    ('text/x-sass', 'django_libsass.SassCompiler'),
-    ('text/x-scss', 'django_libsass.SassCompiler'),
-]
-
-COMPRESS_ENABLED = config('COMPRESS_ENABLED', cast=bool, default=False)
-
-COMPRESS_OFFLINE = config('COMPRESS_OFFLINE', cast=bool, default=False)
-
-COMPRESS_CSS_FILTERS = [
-    'compressor.filters.css_default.CssAbsoluteFilter',
-    'compressor.filters.cssmin.rCSSMinFilter',
-]
-
-COMPRESS_JS_FILTERS = [
-    'compressor.filters.jsmin.JSMinFilter',
-]
 
 # E-mail
 # https://docs.djangoproject.com/en/1.9/topics/email/
