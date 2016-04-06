@@ -32,7 +32,7 @@ BASE_DIR = Path(__file__).absolute().parent.parent
 SECRET_KEY = config('SECRET_KEY', default=crypto.get_random_string(24))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*', cast=Csv())
 
@@ -40,7 +40,6 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*', cast=Csv())
 # Application definition
 
 INSTALLED_APPS = [
-    'collectfast',
     # Django
     'django.contrib.admin',
     'django.contrib.auth',
@@ -146,6 +145,9 @@ MEDIA_ROOT = str(BASE_DIR / 'media-root')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = str(BASE_DIR / 'static-root')
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 
 # E-mail
 # https://docs.djangoproject.com/en/1.9/topics/email/
