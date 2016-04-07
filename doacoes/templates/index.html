@@ -245,7 +245,7 @@
                 </li>
               </ul>
             </fieldset>
-            <button type="submit" class="btn btn-primary submit">Doar</button>
+            <button type="button" class="btn btn-primary submit" data-toggle="modal" data-target="#payment-modal">Doar Com Cartão</button>
           </form>
         </div>
       </div>
@@ -536,6 +536,54 @@
       </div>
     </div>
   </footer>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="payment-modal" aria-labelledby="payment-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Doação com Cartão de Crédito</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <form action="">
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label">Nome:</label>
+                  <input type="text" class="form-control" id="recipient-name">
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label">E-Mail:</label>
+                  <input type="text" class="form-control" id="recipient-name">
+                </div>
+                <hr>
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label">Número do Cartão:</label>
+                  <input type="text" class="form-control" id="recipient-name">
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label">Titular do Cartão:</label>
+                  <input type="text" class="form-control" id="recipient-name">
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label">Código de Segurança:</label>
+                  <input type="text" class="form-control" id="recipient-name">
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label">Validade:</label>
+                  <input type="text" class="form-control" id="recipient-name">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
   <!--/#scripts-->
   <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
