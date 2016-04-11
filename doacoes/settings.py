@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     # 3rd
     'debug_toolbar',
     'django_extensions',
+    'rest_framework',
     # Project
     'doacoes.core',
 ]
