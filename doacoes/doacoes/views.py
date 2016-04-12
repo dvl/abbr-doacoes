@@ -1,8 +1,11 @@
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.utils import crypto, timezone
 
 from rest_framework import viewsets
+from rest_framework.decorators import list_route
 from rest_framework.response import Response
+
 
 from mundipagg_one.data_contracts import (
     buyer,
@@ -15,17 +18,15 @@ from mundipagg_one.data_contracts import (
 from mundipagg_one.enum_types import HttpContentType
 from mundipagg_one.gateway_service_client import GatewayServiceClient
 
-from .serializers import DoacaoSerializer
+from .serializers import DoacaoBoletoSerializer, DoacaoCartaoSerializer
 
 
 class DoacaoViewSet(viewsets.ViewSet):
 
-    def create(self, request):
-        serializer = DoacaoSerializer(data=request.POST)
-        serializer.is_valid(raise_exception=True)
+    def _pagar_via_boleto(self, data):
+        pass
 
-        data = serializer.data
-
+    def _pagar_via_cartao(self, data):
         buyer_data = buyer(
             document_number='12345678901',
             document_type='CPF',
@@ -80,6 +81,28 @@ class DoacaoViewSet(viewsets.ViewSet):
             settings.MUNDIPAGG_API_ENDPOINT,
         )
 
-        http_response = service_client.sale.create_with_request(payment_request)
+        return service_client.sale.create_with_request(payment_request)
+
+    @list_route(methods=['post'])
+    def boleto(self, request, pk=None):
+        serializer = DoacaoBoletoSerializer(data=request.POST)
+        serializer.is_valid(raise_exception=True)
+
+        http_response = self._pagar_via_boleto(serializer.data)
 
         return Response(http_response.json(), http_response.status_code)
+
+    @list_route(methods=['post'])
+    def cartao(self, request, pk=None):
+        serializer = DoacaoCartaoSerializer(data=request.POST)
+        serializer.is_valid(raise_exception=True)
+
+        http_response = self._pagar_via_cartao(serializer.data)
+
+        return Response(http_response.json(), http_response.status_code)
+
+    def list(self, request):
+        return Response({
+            'boleto': request.build_absolute_uri(reverse('doacoes-boleto')),
+            'cartao': request.build_absolute_uri(reverse('doacoes-cartao')),
+        })

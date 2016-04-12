@@ -3,7 +3,7 @@ from django.utils import timezone
 from rest_framework import serializers
 
 
-class DoacaoSerializer(serializers.Serializer):
+class DoacaoCartaoSerializer(serializers.Serializer):
     VISA = "Visa"
     MASTERCARD = "Mastercard"
     HIPERCARD = "Hipercard"
@@ -57,3 +57,7 @@ class DoacaoSerializer(serializers.Serializer):
             raise serializers.ValidationError('Insira um verificador válido.')
 
         return value
+
+
+class DoacaoBoletoSerializer(serializers.Serializer):
+    pass
