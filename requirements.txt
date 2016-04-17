@@ -5,7 +5,7 @@ django-debug-toolbar==1.4
 django-extensions==1.6.1
 djangorestframework==3.3.3
 
-mundipagg-one-python==1.0.1
+git+https://github.com/dvl/mundipagg-one-python.git@9cf463d21111b2d976d4eb79562b4296ce1b06a3#egg=mundipagg_one_python
 python-decouple==3.0
 
 psycopg2==2.6.1
