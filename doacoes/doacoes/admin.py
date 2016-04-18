@@ -8,6 +8,7 @@ class TransacaoAdmin(admin.ModelAdmin):
     list_display = [
         'id',
         'criado_em',
+        'success',
     ]
 
     readonly_fields = [
@@ -20,11 +21,13 @@ class TransacaoAdmin(admin.ModelAdmin):
         'order_key',
         'order_reference',
         'request_key',
+        'success',
     ]
 
     fieldsets = (
         ('Dados da Transação', {
             'fields': (
+                'success',
                 'order_key',
                 'buyer_key',
                 'order_reference',

@@ -41,6 +41,10 @@ class Transacao(models.Model):
         return self.data['RequestKey']
 
     @property
+    def success(self):
+        return self.data.get('ErrorReport') is not None
+
+    @property
     def boleto_url(self):
         try:
             return self.data['BoletoTransactionResultCollection'][0]['BoletoUrl']
