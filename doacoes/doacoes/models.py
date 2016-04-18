@@ -18,7 +18,7 @@ class Transacao(models.Model):
         ]
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     @property
     def order_key(self):
