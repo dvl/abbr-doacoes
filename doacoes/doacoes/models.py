@@ -20,33 +20,27 @@ class Transacao(models.Model):
     def __str__(self):
         return str(self.id)
 
-    @property
     def order_key(self):
-        return self.data['OrderResult']['OrderKey']
+        return self.data['OrderResult'].get('OrderKey')
 
-    @property
     def create_date(self):
-        return self.data['OrderResult']['CreateDate']
+        return self.data['OrderResult'].get('CreateDate')
 
-    @property
     def order_reference(self):
-        return self.data['OrderResult']['OrderReference']
+        return self.data['OrderResult'].get('OrderReference')
 
-    @property
     def buyer_key(self):
         return self.data['BuyerKey']
 
-    @property
     def request_key(self):
         return self.data['RequestKey']
 
-    @property
     def success(self):
-        return self.data.get('ErrorReport') is not None
+        return self.data.get('ErrorReport') is None
+    success.boolean = True
 
-    @property
     def boleto_url(self):
         try:
             return self.data['BoletoTransactionResultCollection'][0]['BoletoUrl']
-        except (KeyError, IndexError):
+        except (KeyError, IndexError, TypeError):
             return None

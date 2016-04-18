@@ -3,7 +3,7 @@ import uuid
 
 from django.conf import settings
 from django import forms
-from django.utils import timezone, crypto
+from django.utils import timezone
 
 from mundipagg_one.data_contracts import (
     boleto_transaction,
@@ -56,7 +56,7 @@ class PagamentoFormBase(forms.Form):
     def clean(self):
         cleaned_data = super().clean()
 
-        order_id = uuid.uuid4()
+        order_reference = uuid.uuid4()
 
         buyer_data = buyer(
             name=cleaned_data['nome'],
@@ -66,7 +66,7 @@ class PagamentoFormBase(forms.Form):
             person_type=self.PERSON_TYPE[cleaned_data['tipo_documento']],
         )
 
-        options_request = order(order_reference=order_id)
+        options_request = order(order_reference=order_reference)
 
         field, transaction_collection = self.get_transaction_collection(cleaned_data)
 
@@ -92,7 +92,7 @@ class PagamentoFormBase(forms.Form):
 
         json_response = http_response.json()
 
-        models.Transacao.objects.create(id=order_id, data=json_response)
+        models.Transacao.objects.create(id=order_reference, data=json_response)
 
         errors = json_response.get('ErrorReport')
 

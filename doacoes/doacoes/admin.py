@@ -7,8 +7,8 @@ from . import models
 class TransacaoAdmin(admin.ModelAdmin):
     list_display = [
         'id',
-        'criado_em',
         'success',
+        'criado_em',
     ]
 
     readonly_fields = [
