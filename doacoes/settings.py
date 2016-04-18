@@ -50,9 +50,9 @@ INSTALLED_APPS = [
     # 3rd
     'debug_toolbar',
     'django_extensions',
-    'rest_framework',
     # Project
     'doacoes.core',
+    'doacoes.doacoes',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -186,4 +186,7 @@ LOGGING = {
 
 MUNDIPAGG_API_ENVIRONMENT = 1  # 1 = Sandbox, 2 = Production
 MUNDIPAGG_API_ENDPOINT = config('MUNDIPAGG_API_ENDPOINT', default='https://sandbox.mundipaggone.com/')
-MUNDIPAGG_API_KEY = config('MUNDIPAGG_API_KEY', default='076550d2-b27e-4d88-8bda-a5115f6591d6', cast=UUID)
+MUNDIPAGG_API_KEY = config('MUNDIPAGG_API_KEY', default='ff0b5cd0-d55c-4d38-8ee2-60db913e309b', cast=UUID)
+
+MUNDIPAGG_BOLETO_BANCO = '237'
+MUNDIPAGG_BOLETO_NUMERO_DOCUMENTO = '12345678901'

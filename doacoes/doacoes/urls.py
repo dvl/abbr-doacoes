@@ -1,7 +1,10 @@
 from django.conf.urls import url
-from django.views.generic import TemplateView
 
+from . import views
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
+    url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^cartao/$', views.CartaoFormView.as_view(), name='cartao'),
+    url(r'^boleto/$', views.BoletoFormView.as_view(), name='boleto'),
+    url(r'^sucesso/$', views.SucessoView.as_view(), name='sucesso'),
 ]

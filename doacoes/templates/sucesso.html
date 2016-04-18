@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Obrigado!</h2>
+  <p>Sua doação foi recebida com sucesso.</p>
+  {% if boleto_url %}
+    <p>Clique <a href="{{ boleto_url }}"></a>aqui para imprimir seu boleto.</p>
+  {% endif %}
+{% endblock %}
