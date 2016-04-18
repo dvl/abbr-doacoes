@@ -38,6 +38,9 @@ migrate:
 createsuperuser:
 	@docker-compose run --rm web python manage.py createsuperuser
 
+shell:
+	@docker-compose run --rm web python manage.py shell
+
 test:
 	@docker-compose run --rm -e REUSE_DB=1 web coverage run --source=. --omit=*/wsgi.py manage.py test
 	@docker-compose run --rm web coverage report

@@ -1,9 +1,12 @@
+import uuid
+
 from django.contrib.postgres.fields import JSONField
+from django.core.urlresolvers import reverse
 from django.db import models
 
 
 class Transacao(models.Model):
-    id = models.UUIDField(primary_key=True, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     data = JSONField()
 
@@ -44,3 +47,6 @@ class Transacao(models.Model):
             return self.data['BoletoTransactionResultCollection'][0]['BoletoUrl']
         except (KeyError, IndexError, TypeError):
             return None
+
+    def get_absolute_url(self):
+        return reverse('doacoes:sucesso', kwargs={'pk': self.pk})

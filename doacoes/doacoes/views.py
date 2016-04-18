@@ -1,24 +1,24 @@
-from django.core.urlresolvers import reverse_lazy
 from django.views import generic
 
-from . import forms
+from . import forms, models
 
 
 class IndexView(generic.TemplateView):
     template_name = 'index.html'
 
 
-class BoletoFormView(generic.FormView):
+class PagamentoBaseFormView(generic.CreateView):
+    template_name = 'form.html'
+
+
+class BoletoFormView(PagamentoBaseFormView):
     form_class = forms.BoletoForm
-    template_name = 'form.html'
-    success_url = reverse_lazy('doacoes:sucesso')
 
 
-class CartaoFormView(generic.FormView):
+class CartaoFormView(PagamentoBaseFormView):
     form_class = forms.CartaoForm
-    template_name = 'form.html'
-    success_url = reverse_lazy('doacoes:sucesso')
 
 
-class SucessoView(generic.TemplateView):
+class SucessoView(generic.DetailView):
+    model = models.Transacao
     template_name = 'sucesso.html'

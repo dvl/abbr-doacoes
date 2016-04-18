@@ -3,7 +3,7 @@
 {% block content %}
   <h2>Obrigado!</h2>
   <p>Sua doação foi recebida com sucesso.</p>
-  {% if boleto_url %}
-    <p>Clique <a href="{{ boleto_url }}"></a>aqui para imprimir seu boleto.</p>
+  {% if object.boleto_url %}
+    <p>Clique <a href="{{ object.boleto_url }}">aqui</a> para imprimir seu boleto.</p>
   {% endif %}
 {% endblock %}
