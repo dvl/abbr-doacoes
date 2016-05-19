@@ -1,9 +1,9 @@
 import re
-import uuid
 
-from django.conf import settings
 from django import forms
-from django.utils import timezone, crypto
+from django.conf import settings
+from django.core import validators
+from django.utils import timezone
 
 from mundipagg_one.data_contracts import (
     boleto_transaction,
@@ -36,13 +36,14 @@ class PagamentoFormBase(forms.ModelForm):
         CNPJ: 'Company',
     }
 
-    nome = forms.CharField()
-    email = forms.EmailField()
+    nome = forms.CharField(label='Nome Completo')
+    email = forms.EmailField(label='E-mail')
+    email_confirmacao = forms.EmailField(label='Confirmação do E-mail')
 
-    tipo_documento = forms.ChoiceField(TIPO_DOCUMENTO_CHOICES)
-    numero_documento = forms.CharField()
+    tipo_documento = forms.ChoiceField(label='Tipo do Documento', choices=TIPO_DOCUMENTO_CHOICES)
+    numero_documento = forms.CharField(label='Número do Documento')
 
-    valor = forms.IntegerField()
+    valor = forms.IntegerField(label='Valor da Doação')
 
     class Meta:
         model = models.Transacao
@@ -59,6 +60,12 @@ class PagamentoFormBase(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
+
+        if cleaned_data['email'] != cleaned_data['email_confirmacao']:
+            raise forms.ValidationError({
+                'email': 'Os emails digitados não conferem.',
+                'email_confirmacao': 'Os emails digitados não conferem.'
+            })
 
         buyer_data = buyer(
             name=cleaned_data['nome'],
@@ -100,6 +107,8 @@ class PagamentoFormBase(forms.ModelForm):
             raise forms.ValidationError([e['Description'] for e in errors['ErrorItemCollection']])
 
         self.instance.data = json_response
+
+        return cleaned_data
 
 
 class BoletoForm(PagamentoFormBase):
@@ -145,43 +154,19 @@ class CartaoForm(PagamentoFormBase):
         (HUGCARD, "HugCard"),
     )
 
-    numero_cartao = forms.CharField()
-    nome_titular = forms.CharField()
-    validade_mes = forms.IntegerField()
-    validade_ano = forms.IntegerField()
-    verificador = forms.IntegerField()
-    bandeira_cartao = forms.ChoiceField(BANDEIRA_CHOICES)
+    numero_cartao = forms.CharField(label='Número do Cartão')
+    nome_titular = forms.CharField(label='Nome do Titular')
+    validade_mes = forms.IntegerField(label='Validade (Mês)')
+    validade_ano = forms.IntegerField(label='Validade (Ano)')
+    verificador = forms.IntegerField(label='Código de Segurança')
+    bandeira_cartao = forms.ChoiceField(label='Bandeira do Cartão', choices=BANDEIRA_CHOICES)
 
     recorrencia = forms.BooleanField(required=False)
-
-    def clean_validade_mes(self):
-        data = self.cleaned_data['validade_mes']
-
-        if data < 1 or data > 12:
-            raise forms.ValidationError('Insira um mês válido.')
-
-        return data
-
-    def clean_validade_ano(self):
-        data = self.cleaned_data['validade_ano']
-
-        if data < timezone.now().year or len(str(data)) != 4:
-            raise forms.ValidationError('Insira um ano válido.')
-
-        return data
-
-    def clean_verificador(self):
-        data = self.cleaned_data['verificador']
-
-        if len(str(data)) not in [3, 4]:
-            raise forms.ValidationError('Insira um verificador válido.')
-
-        return data
 
     def get_transaction_collection(self, cleaned_data):
         creditcard_transaction_options_data = creditcard_transaction_options(
             payment_method_code=1,
-            soft_descriptor_text='Jedi Mega Store',
+            soft_descriptor_text='ABBR',
             currency_iso='BRL',
         )
 

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     # 3rd
     'debug_toolbar',
     'django_extensions',
+    'bootstrap3',
     # Project
     'abbr.core',
     'abbr.doacoes',

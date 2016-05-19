@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 
+{% load bootstrap3 %}
+
 {% block title %}Form{% endblock %}
 
 {% block content %}
-  <form method="POST">
-    {% csrf_token %}
-    <table>
-      {{ form.as_table }}
+  <div class="content col-md-8">
+    <form method="POST">
+      {% csrf_token %}
+      <table>
+        {% bootstrap_form form %}
 
-      <tr>
-        <td colspan="2">
-          <input type="submit" value="Doar">
-        </td>
-      </tr>
-    </table>
-  </form>
+        {% buttons %}
+          <button type="submit" class="btn btn-primary">Submit</button>
+        {% endbuttons %}
+      </table>
+    </form>
+  </div>
 {% endblock %}

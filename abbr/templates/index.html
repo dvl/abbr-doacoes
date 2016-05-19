@@ -3,9 +3,7 @@
 {% block title %}Index{% endblock %}
 
 {% block content %}
-  <ul>
-    <li><a href="{% url 'doacoes:cartao' %}">Cartão</a></li>
-    <li><a href="{% url 'doacoes:boleto' %}">Boleto</a></li>
-    <li><a href="#">PayPal</a></li>
-  </ul>
+  <div class="content col-md-8">
+    {% lorem 10 p %}
+  </div>
 {% endblock %}
