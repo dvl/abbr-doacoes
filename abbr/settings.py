@@ -51,8 +51,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'django_extensions',
     # Project
-    'doacoes.core',
-    'doacoes.doacoes',
+    'abbr.core',
+    'abbr.doacoes',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -69,13 +69,13 @@ MIDDLEWARE_CLASSES = [
     # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
-ROOT_URLCONF = 'doacoes.urls'
+ROOT_URLCONF = 'abbr.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            str(BASE_DIR / 'doacoes' / 'templates'),
+            str(BASE_DIR / 'abbr' / 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -89,10 +89,10 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'doacoes.wsgi.application'
+WSGI_APPLICATION = 'abbr.wsgi.application'
 
 DEBUG_TOOLBAR_CONFIG = {
-    'SHOW_TOOLBAR_CALLBACK': 'doacoes.core.middleware.show_toolbar'
+    'SHOW_TOOLBAR_CALLBACK': 'abbr.core.middleware.show_toolbar'
 }
 
 
@@ -138,7 +138,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATICFILES_DIRS = [
-    str(BASE_DIR / 'doacoes' / 'static'),
+    str(BASE_DIR / 'abbr' / 'static'),
 ]
 
 MEDIA_URL = '/media/'
@@ -150,7 +150,7 @@ STATIC_ROOT = str(BASE_DIR / 'static-root')
 # E-mail
 # https://docs.djangoproject.com/en/1.9/topics/email/
 
-EMAIL_SUBJECT_PREFIX = '[DOACOES] '
+EMAIL_SUBJECT_PREFIX = '[ABBR] '
 
 
 # Logging
@@ -184,7 +184,7 @@ LOGGING = {
 # MundiPagg
 # http://docs.mundipagg.com/
 
-MUNDIPAGG_API_ENVIRONMENT = 1  # 1 = Sandbox, 2 = Production
+MUNDIPAGG_API_ENVIRONMENT = config('MUNDIPAGG_API_ENVIRONMENT', default=1, cast=int)
 MUNDIPAGG_API_ENDPOINT = config('MUNDIPAGG_API_ENDPOINT', default='https://sandbox.mundipaggone.com/')
 MUNDIPAGG_API_KEY = config('MUNDIPAGG_API_KEY', default='ff0b5cd0-d55c-4d38-8ee2-60db913e309b', cast=UUID)
 

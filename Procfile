@@ -1,1 +1,1 @@
-web: waitress-serve --port=$PORT doacoes.wsgi:application
+web: waitress-serve --port=$PORT abbr:application
