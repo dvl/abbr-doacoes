@@ -149,6 +149,8 @@ MEDIA_ROOT = str(BASE_DIR / 'media-root')
 STATIC_URL = '/static/'
 STATIC_ROOT = str(BASE_DIR / 'static-root')
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # E-mail
 # https://docs.djangoproject.com/en/1.9/topics/email/
 
