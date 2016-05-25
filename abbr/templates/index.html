@@ -1,9 +1,23 @@
 {% extends 'base.html' %}
 
-{% block title %}Index{% endblock %}
+{% load staticfiles %}
 
 {% block content %}
-  <div class="content col-md-8">
-    {% lorem 10 p %}
-  </div>
+  <ul class="type-payment">
+    <li>
+      <a href="{% url 'doacoes:cartao' %}">
+        <img src="{% static 'img/credit-card.svg' %}" alt="Cartão de Crédito" />
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'doacoes:boleto' %}">
+        <img src="{% static 'img/barcode.svg' %}" alt="Boleto" />
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <img src="{% static 'img/paypal.svg' %}" alt="PayPal" />
+      </a>
+    </li>
+  </ul>
 {% endblock %}

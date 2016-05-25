@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     # 3rd
     'debug_toolbar',
     'django_extensions',
-    'bootstrap3',
+    'floppyforms',
     # Project
     'abbr.core',
     'abbr.doacoes',
@@ -140,6 +140,7 @@ USE_TZ = True
 
 STATICFILES_DIRS = [
     str(BASE_DIR / 'abbr' / 'static'),
+    str(BASE_DIR / 'bower_components'),
 ]
 
 MEDIA_URL = '/media/'

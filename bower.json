@@ -1,0 +1,22 @@
+{
+  "name": "abbr-doacoes",
+  "homepage": "https://github.com/dvl/abbr-doacoes",
+  "authors": [
+    "André Luiz <contato@xdvl.info>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "supersized": "*",
+    "jquery": "^2.2.4"
+  }
+}

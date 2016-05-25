@@ -1,7 +1,7 @@
 Django==1.9.5
 
 dj-database-url==0.3.0
-django-bootstrap3==7.0.1
+django-floppyforms==1.6.2
 django-debug-toolbar==1.4
 django-extensions==1.6.1
 
