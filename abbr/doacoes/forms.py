@@ -61,7 +61,7 @@ class PagamentoFormBase(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
 
-        if cleaned_data['email'] != cleaned_data['email_confirmacao']:
+        if cleaned_data.get('email', 'a') != cleaned_data.get('email_confirmacao', 'b'):
             raise forms.ValidationError({
                 'email': 'Os emails digitados não conferem.',
                 'email_confirmacao': 'Os emails digitados não conferem.'
