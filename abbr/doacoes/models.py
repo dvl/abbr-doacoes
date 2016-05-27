@@ -107,10 +107,12 @@ class Doacao(models.Model):
         except (KeyError, IndexError, TypeError):
             return None
 
-    def finalizado(self):
-        return self.resposta_gateway is not None
-    finalizado.boolean = True
+    def status_pagamento(self):
+        try:
+            return self.notificacao_gateway['StatusNotification']['OrderStatus']
+        except (KeyError, IndexError, TypeError):
+            return 'Opened'
 
-    def sucesso(self):
-        return True
-    sucesso.boolean = True
+    def enviado_gateway(self):
+        return self.resposta_gateway is not None
+    enviado_gateway.boolean = True

@@ -20,13 +20,13 @@ class DoacaoView(generic.CreateView):
 
     def get_initial(self):
         return {
-            'forma_pagamento': self.kwargs.get('forma_pagamento'),
+            'forma_pagamento': self.kwargs['forma_pagamento'],
         }
 
     def get_form(self, form_class=None):
         form_class = super().get_form(form_class)
 
-        if self.request.GET.get('forma_pagamento') != Doacao.CARTAO_CREDITO:
+        if self.kwargs['forma_pagamento'] != Doacao.CARTAO_CREDITO:
             del form_class.fields['recorrencia']
 
         return form_class
@@ -43,7 +43,7 @@ class PagamentoView(generic.UpdateView):
     def get_queryset(self):
         qs = super().get_queryset()
 
-        return qs.filter(resposta_gateway__isnull=True)  # Tudo que ainda não foi pago
+        return qs.filter(resposta_gateway__isnull=True)  # Tudo que ainda não foi finalizado
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
