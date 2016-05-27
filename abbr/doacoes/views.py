@@ -52,16 +52,17 @@ class PagamentoView(generic.UpdateView):
             # vai direto para MundiPagg, os dados que já tenho em
             # self.object já são o bastante para gerar um boleto
             # bancário.
-            self.object.resposta_gateway = pagamento_boleto(self.object)
+            self.object.resposta_gateway = pagamento_boleto(self.object.__dict__)
             self.object.save()
 
         return HttpResponseRedirect(self.get_success_url())
 
     def form_valid(self, form):
-        resposta = pagamento_cartao(self.object, form)
+        resposta = pagamento_cartao(self.object.__dict__, form.cleaned_data)
 
-        if resposta['sucesso'] is False:
-            # injeta o erros no form de alguma forma...
+        erros = resposta.get('ErrorReport')
+
+        if erros:
             # por que essa bizarrice? não tem nada demais só estamos
             # reaproveitando o validador e o comportamento e o comportamento
             # do form_invalid que fazem exatamente o que eu quero, mesmo
@@ -69,6 +70,9 @@ class PagamentoView(generic.UpdateView):
             #
             # Pior que isso seria efetuar um pagamento dentro da validação
             # do form, sem o escopo do request.
+            erros = [e['Description'] for e in erros['ErrorItemCollection']]
+            form.add_error(None, erros)
+
             return self.form_invalid(form)
 
         self.object.resposta_gateway = resposta

@@ -64,24 +64,15 @@ def _processar_transacao(dados, transaction_collection):
 
     return json_response
 
-    # errors = json_response.get('ErrorReport')
-
-    # if errors:
-    #     raise forms.ValidationError([e['Description'] for e in errors['ErrorItemCollection']])
-
-    # self.instance.data = json_response
-
-    # return dados
-
 
 def pagamento_boleto(dados):
     boleto_options = boleto_transaction_options('BRL', 5)
 
     transaction_collection = [
         boleto_transaction(
-            dados['valor'],
+            amount_in_cents=int(dados['valor_doacao']) * 100,
             bank_number=settings.MUNDIPAGG_BOLETO_BANCO,
-            document_number='12345678901',
+            document_number='12345678909',
             instructions='Pagar antes do vencimento',
             options=boleto_options
         )
@@ -101,7 +92,7 @@ def pagamento_cartao(dados, cartao):
 
     creditcard_data = creditcard(
         creditcard_number=cartao['numero_cartao'],
-        creditcard_brand=cartao['bandeira_cartao'],
+        creditcard_brand=cartao['bandeira'],
         exp_month=int(cartao['validade_mes']),
         exp_year=int(cartao['validade_ano']),
         security_code=cartao['verificador'],
@@ -121,13 +112,13 @@ def pagamento_cartao(dados, cartao):
 
     transaction_collection = [
         creditcard_transaction(
-            amount_in_cents=dados['valor'],
+            amount_in_cents=int(dados['valor_doacao']) * 100,
             creditcard=creditcard_data,
             recurrency=recurrency_data,
             options=creditcard_transaction_options_data,
         )
     ]
 
-    collection = 'boleto_transaction_collection', transaction_collection
+    collection = 'creditcard_transaction_collection', transaction_collection
 
     return _processar_transacao(dados, collection)
