@@ -47,6 +47,9 @@ test:
 flake8:
 	@docker-compose run --rm web flake8 . --max-line-length=99 --max-complexity=8 --exclude="*/migrations/**"
 
+bash:
+	@docker-compose run --rm web bash
+
 clear:
 	@rm -fr bower_components/
 	@rm -fr node_modules/

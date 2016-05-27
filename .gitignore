@@ -6,6 +6,7 @@ media-root/
 node_modules/
 static-root/
 _build/
+src/
 
 .env
 .venv

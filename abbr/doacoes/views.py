@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.views import generic
 
-from abbr.core.mundipagg import boleto_bancario, cartao_credito
+from abbr.core.mundipagg import pagamento_boleto, pagamento_cartao
 from abbr.doacoes.forms import DoacaoForm, PagamentoForm
 from abbr.doacoes.models import Doacao
 
@@ -52,13 +52,13 @@ class PagamentoView(generic.UpdateView):
             # vai direto para MundiPagg, os dados que já tenho em
             # self.object já são o bastante para gerar um boleto
             # bancário.
-            self.object.resposta_gateway = boleto_bancario(self.object)
+            self.object.resposta_gateway = pagamento_boleto(self.object)
             self.object.save()
 
         return HttpResponseRedirect(self.get_success_url())
 
     def form_valid(self, form):
-        resposta = cartao_credito(self.object, form)
+        resposta = pagamento_cartao(self.object, form)
 
         if resposta['sucesso'] is False:
             # injeta o erros no form de alguma forma...
