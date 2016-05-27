@@ -45,10 +45,10 @@ class PagamentoView(generic.UpdateView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
 
-        if self.object.forma_pagamento in Doacao.CARTAO_CREDITO:
+        if self.object.forma_pagamento == Doacao.CARTAO_CREDITO:
             return self.render_to_response(self.get_context_data())
 
-        if self.object.forma_pagamento in Doacao.BOLETO_BANCARIO:
+        if self.object.forma_pagamento == Doacao.BOLETO_BANCARIO:
             # vai direto para MundiPagg, os dados que já tenho em
             # self.object já são o bastante para gerar um boleto
             # bancário.
