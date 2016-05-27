@@ -9,6 +9,7 @@ Para instalar e rodar o projeto você vai precisar:
 Da forma fácil:
 
 * Docker
+* docker-compose
 
 Da maneira manual:
 
