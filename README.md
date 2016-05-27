@@ -24,7 +24,7 @@ Da maneira manual:
     
 ## Local
 
-    # createdb abbr
+    $ sudo -u postgres createdb abbr
     $ cp .env-example .env
     $ vim .env
     $ mkvirtualenv --python=`which python3` abbr
