@@ -1,4 +1,3 @@
-import json
 import xmltodict
 
 from django.core.urlresolvers import reverse_lazy
