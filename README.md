@@ -37,6 +37,10 @@ Após a instalação você poderá acessar o site para desenvolvimento em [http:
 
 # Licença
 
+Copyright (C) André Luiz <contato@xdvl.info> - All Rights Reserved
+Unauthorized copying of this file, via any medium is strictly prohibited 
+Proprietary and confidential
+
 * Your use of the item is restricted to a single installation.
 * You may use the item in work which you are creating for your own purposes or for your client.
 * You must not incorporate the item in a work which is created for redistribution or resale by you or your client.
