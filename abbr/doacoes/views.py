@@ -45,18 +45,17 @@ class PagamentoView(generic.UpdateView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
 
+        if self.object.forma_pagamento in Doacao.CARTAO_CREDITO:
+            return self.render_to_response(self.get_context_data())
+
         if self.object.forma_pagamento in Doacao.BOLETO_BANCARIO:
             # vai direto para MundiPagg, os dados que já tenho em
             # self.object já são o bastante para gerar um boleto
             # bancário.
             self.object.resposta_gateway = boleto_bancario(self.object)
             self.object.save()
-            return HttpResponseRedirect(self.get_success_url())
 
-        elif self.object.forma_pagamento == Doacao.PAYPAL:
-            return HttpResponseRedirect(self.get_success_url())
-
-        return self.render_to_response(self.get_context_data())
+        return HttpResponseRedirect(self.get_success_url())
 
     def form_valid(self, form):
         resposta = cartao_credito(self.object, form)
