@@ -1,10 +1,13 @@
 from django.conf.urls import url
 
-from . import views
+from abbr.doacoes.views import (
+    IndexView, DoacaoView, PagamentoView, SucessoView
+)
+
 
 urlpatterns = [
-    url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^cartao/$', views.CartaoFormView.as_view(), name='cartao'),
-    url(r'^boleto/$', views.BoletoFormView.as_view(), name='boleto'),
-    url(r'^sucesso/(?P<pk>[A-Fa-f0-9-]{36})/$', views.SucessoView.as_view(), name='sucesso'),
+    url(r'^$', IndexView.as_view(), name='index'),
+    url(r'^doar/$', DoacaoView.as_view(), name='inicio'),
+    url(r'^pagamento/(?P<pk>[A-Fa-f0-9-]{36})/$', PagamentoView.as_view(), name='pagamento'),
+    url(r'^sucesso/(?P<pk>[A-Fa-f0-9-]{36})/$', SucessoView.as_view(), name='sucesso'),
 ]

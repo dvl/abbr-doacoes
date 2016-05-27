@@ -1,52 +1,92 @@
 import uuid
 
 from django.contrib.postgres.fields import JSONField
-from django.core.urlresolvers import reverse
 from django.db import models
 
 
-class Transacao(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+class Doacao(models.Model):
+    CPF = 'cpf'
+    CNPJ = 'cnpj'
 
-    data = JSONField()
+    TIPO_DOCUMENTO_CHOICES = (
+        (CPF, 'CPF'),
+        (CNPJ, 'CNPJ'),
+    )
 
-    criado_em = models.DateTimeField(auto_now_add=True)
-    atualizado_em = models.DateTimeField(auto_now=True)
+    CARTAO_CREDITO = 'cartao'
+    BOLETO_BANCARIO = 'boleto'
+    PAYPAL = 'paypal'
+
+    TIPO_FORMA_PAGAMENTO = (
+        (CARTAO_CREDITO, 'Cartão de Crédito'),
+        (BOLETO_BANCARIO, 'Boleto Bancário'),
+        (PAYPAL, 'PayPal'),
+    )
+
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+    )
+
+    nome = models.CharField(
+        verbose_name='Nome Completo',
+        max_length=90,
+    )
+
+    email = models.EmailField(
+        verbose_name='E-mail',
+    )
+
+    tipo_documento = models.CharField(
+        verbose_name='Tipo do Documento',
+        choices=TIPO_DOCUMENTO_CHOICES,
+        max_length=15,
+    )
+
+    numero_documento = models.CharField(
+        verbose_name='Número do Documento',
+        max_length=15,
+    )
+
+    valor_doacao = models.DecimalField(
+        verbose_name='Valor da Doação (R$)',
+        max_digits=6,
+        decimal_places=2
+    )
+
+    forma_pagamento = models.CharField(
+        verbose_name='Forma de Pagamento',
+        choices=TIPO_FORMA_PAGAMENTO,
+        max_length=6,
+    )
+
+    recorrencia = models.BooleanField(
+        verbose_name='Doação Mensal',
+        default=False,
+    )
+
+    resposta_gateway = JSONField(
+        verbose_name='Resposta da Mundipagg',
+        null=True,
+        editable=False,
+    )
+
+    criado_em = models.DateTimeField(
+        verbose_name='Criado em',
+        auto_now_add=True,
+    )
+
+    atualizado_em = models.DateTimeField(
+        verbose_name='Atualizado em',
+        auto_now=True,
+    )
 
     class Meta:
-        verbose_name = 'Transação'
-        verbose_name_plural = 'Transações'
-        ordering = [
-            '-criado_em',
-        ]
+        verbose_name = 'doação'
+        verbose_name_plural = 'doações'
+
+        required_db_vendor = 'postgresql'
 
     def __str__(self):
-        return str(self.id)
-
-    def order_key(self):
-        return self.data['OrderResult'].get('OrderKey')
-
-    def create_date(self):
-        return self.data['OrderResult'].get('CreateDate')
-
-    def order_reference(self):
-        return self.data['OrderResult'].get('OrderReference')
-
-    def buyer_key(self):
-        return self.data['BuyerKey']
-
-    def request_key(self):
-        return self.data['RequestKey']
-
-    def success(self):
-        return self.data.get('ErrorReport') is None
-    success.boolean = True
-
-    def boleto_url(self):
-        try:
-            return self.data['BoletoTransactionResultCollection'][0]['BoletoUrl']
-        except (KeyError, IndexError, TypeError):
-            return None
-
-    def get_absolute_url(self):
-        return reverse('doacoes:sucesso', kwargs={'pk': self.pk})
+        return '{}'.format(self.pk)

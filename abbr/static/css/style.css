@@ -586,7 +586,7 @@ body {
 .main_content form .email {
   width: 40%;
 }
-.main_content form .tipo-documento{
+.main_content form select {
   border: 1px solid #999;
   background: transparent;
   padding: 10px;

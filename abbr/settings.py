@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'django_extensions',
     'floppyforms',
     # Project
-    'abbr.core',
     'abbr.doacoes',
 ]
 

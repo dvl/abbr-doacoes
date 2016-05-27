@@ -1,46 +1,45 @@
 from django.contrib import admin
 
-from . import models
+from abbr.doacoes.models import Doacao
 
 
-@admin.register(models.Transacao)
-class TransacaoAdmin(admin.ModelAdmin):
-    list_display = [
-        'id',
-        'success',
+@admin.register(Doacao)
+class DoacaoAdmin(admin.ModelAdmin):
+    list_display = (
+        'nome',
+        'email',
+        'tipo_documento',
+        'numero_documento',
+        'valor_doacao',
+        'forma_pagamento',
+        'recorrencia',
         'criado_em',
-    ]
-
-    readonly_fields = [
         'atualizado_em',
-        'boleto_url',
-        'buyer_key',
-        'create_date',
-        'criado_em',
-        'data',
-        'order_key',
-        'order_reference',
-        'request_key',
-        'success',
-    ]
-
-    fieldsets = (
-        ('Dados da Transação', {
-            'fields': (
-                'success',
-                'order_key',
-                'buyer_key',
-                'order_reference',
-                'request_key',
-                'create_date',
-                'boleto_url',
-            ),
-        }),
-        ('Metadados', {
-            'fields': (
-                'data',
-                'criado_em',
-                'atualizado_em',
-            ),
-        }),
     )
+
+    search_fields = (
+        'nome',
+        'email',
+        'tipo_documento',
+        'numero_documento',
+        'valor_doacao',
+        'forma_pagamento',
+        'recorrencia',
+        'criado_em',
+        'atualizado_em',
+    )
+
+    list_filter = (
+        'tipo_documento',
+        'forma_pagamento',
+        'recorrencia',
+    )
+
+    def get_readonly_fields(self, request, obj=None):
+        return [f.name for f in self.model._meta.fields]
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False

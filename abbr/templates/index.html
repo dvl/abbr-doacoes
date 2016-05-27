@@ -3,21 +3,8 @@
 {% load staticfiles %}
 
 {% block content %}
-  <ul class="type-payment">
-    <li>
-      <a href="{% url 'doacoes:cartao' %}">
-        <img src="{% static 'img/credit-card.svg' %}" alt="Cartão de Crédito" />
-      </a>
-    </li>
-    <li>
-      <a href="{% url 'doacoes:boleto' %}">
-        <img src="{% static 'img/barcode.svg' %}" alt="Boleto" />
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <img src="{% static 'img/paypal.svg' %}" alt="PayPal" />
-      </a>
-    </li>
-  </ul>
+  <form action="{% url 'doacoes:inicio' %}" method="GET" id="id_doacao_form">
+    {{ view.form.as_p }}
+    <input type="submit" value="Doar">
+  </form>
 {% endblock %}
