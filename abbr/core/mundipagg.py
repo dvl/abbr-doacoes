@@ -36,18 +36,19 @@ def _processar_transacao(dados, transaction_collection):
         person_type=_person_type(dados['tipo_documento']),
     )
 
-    # options_request = order(order_reference=dados)
+    options_request = order(order_reference=dados['id'])
 
     field, transaction_collection = transaction_collection
 
-    request = create_sale_request(**{
-        field: transaction_collection,
-        # 'order': options_request,
-        'buyer': buyer_data,
-    })
-
     merchant_key = settings.MUNDIPAGG_API_KEY
     end_point = settings.MUNDIPAGG_API_ENDPOINT
+
+    request = create_sale_request(**{
+        field: transaction_collection,
+        'order': options_request,
+        'request_key': merchant_key,
+        'buyer': buyer_data,
+    })
 
     service_client = GatewayServiceClient(
         merchant_key,

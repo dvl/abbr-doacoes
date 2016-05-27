@@ -36,7 +36,6 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*', cast=Csv())
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -95,12 +94,10 @@ DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': 'abbr.core.middleware.show_toolbar'
 }
 
-
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {'default': config('DATABASE_URL', cast=db_url, default='sqlite:///db.sqlite3')}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -119,7 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
@@ -155,7 +151,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 EMAIL_SUBJECT_PREFIX = '[ABBR] '
 
-
 # Logging
 # https://docs.djangoproject.com/en/1.9/topics/logging
 
@@ -183,7 +178,6 @@ LOGGING = {
     }
 }
 
-
 # MundiPagg
 # http://docs.mundipagg.com/
 
@@ -191,5 +185,5 @@ MUNDIPAGG_API_ENVIRONMENT = config('MUNDIPAGG_API_ENVIRONMENT', default=1, cast=
 MUNDIPAGG_API_ENDPOINT = config('MUNDIPAGG_API_ENDPOINT', default='https://sandbox.mundipaggone.com/')
 MUNDIPAGG_API_KEY = config('MUNDIPAGG_API_KEY', default='ff0b5cd0-d55c-4d38-8ee2-60db913e309b', cast=UUID)
 
-MUNDIPAGG_BOLETO_BANCO = '237'
-MUNDIPAGG_BOLETO_NUMERO_DOCUMENTO = '12345678901'
+MUNDIPAGG_BOLETO_BANCO = config('MUNDIPAGG_BOLETO_BANCO', default='237')
+MUNDIPAGG_BOLETO_NUMERO_DOCUMENTO = config('MUNDIPAGG_BOLETO_NUMERO_DOCUMENTO', default='12345678901')

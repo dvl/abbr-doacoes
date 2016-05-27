@@ -86,7 +86,17 @@ class Doacao(models.Model):
         verbose_name = 'doação'
         verbose_name_plural = 'doações'
 
+        ordering = (
+            '-criado_em',
+        )
+
         required_db_vendor = 'postgresql'
 
     def __str__(self):
         return '{}'.format(self.pk)
+
+    def boleto_url(self):
+        try:
+            return self.resposta_gateway['BoletoTransactionResultCollection'][0]['BoletoUrl']
+        except (KeyError, IndexError, TypeError):
+            return None
