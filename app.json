@@ -24,7 +24,7 @@
       "value": "https://sandbox.mundipaggone.com/"
     },
     "MUNDIPAGG_API_ENVIRONMENT": {
-      "description": "",
+      "description": "sandbox = 1, production = 2",
       "value": "1"
     },
     "MUNDIPAGG_API_KEY": {
