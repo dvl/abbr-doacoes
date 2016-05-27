@@ -39,7 +39,7 @@ Após a instalação você poderá acessar o site para desenvolvimento em [http:
 
 Copyright (C) André Luiz (contato@xdvl.info) - All Rights Reserved.
 
-Unauthorized copying of this file, via any medium is strictly prohibited.
+Unauthorized copying of this project, via any medium is strictly prohibited.
 
 Proprietary and confidential.
 
