@@ -36,6 +36,9 @@ migrations:
 migrate:
 	@docker-compose run --rm web python manage.py migrate
 
+shell:
+	@docker-compose run --rm web python manage.py shell
+
 createsuperuser:
 	@docker-compose run --rm web python manage.py createsuperuser
 

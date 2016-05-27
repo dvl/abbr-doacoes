@@ -72,6 +72,12 @@ class Doacao(models.Model):
         editable=False,
     )
 
+    notificacao_gateway = JSONField(
+        verbose_name='Notificação da Mundipagg',
+        null=True,
+        editable=False,
+    )
+
     criado_em = models.DateTimeField(
         verbose_name='Criado em',
         auto_now_add=True,
@@ -100,3 +106,11 @@ class Doacao(models.Model):
             return self.resposta_gateway['BoletoTransactionResultCollection'][0]['BoletoUrl']
         except (KeyError, IndexError, TypeError):
             return None
+
+    def finalizado(self):
+        return self.resposta_gateway is not None
+    finalizado.boolean = True
+
+    def sucesso(self):
+        return True
+    sucesso.boolean = True

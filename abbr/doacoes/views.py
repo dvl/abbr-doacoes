@@ -1,6 +1,10 @@
+import json
+import xmltodict
+
 from django.core.urlresolvers import reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect
 from django.views import generic
+from django.views.decorators.csrf import csrf_exempt
 
 from abbr.core.mundipagg import pagamento_boleto, pagamento_cartao
 from abbr.doacoes.forms import DoacaoForm, PagamentoForm
@@ -89,8 +93,21 @@ class SucessoView(generic.DetailView):
     template_name = 'sucesso.html'
 
 
+@csrf_exempt
 def webhook_mundipagg(request):
-    pass
+    # essa porra é orgão público para em pleno ano de 2016 usar XML?
+    # xml = request.body
+    # o formato abaixo é tão bosta que o POSTMAN não sabe enviar um XML assim...
+    xml = request.body.POST['xmlStatusNotification']
+    better_data_structure_than_xml = xmltodict.parse(xml)
+
+    reference = better_data_structure_than_xml['StatusNotification']['OrderReference']
+
+    doacao = Doacao.objects.get(pk=reference)
+    doacao.notificacao_gateway = better_data_structure_than_xml
+    doacao.save()
+
+    return JsonResponse({'recebido': True})
 
 
 def webhook_paypal(request):
