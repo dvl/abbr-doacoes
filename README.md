@@ -33,7 +33,7 @@ Da maneira manual:
     $ python manage.py migrate
     $ python manage.py runserver
     
-Após a instalação você poderá acessar o site para desenvolvimento em [](http://localhost:8000/)
+Após a instalação você poderá acessar o site para desenvolvimento em [http://localhost:8000/]()
 
 # Licença
 
