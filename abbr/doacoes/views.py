@@ -13,7 +13,7 @@ class IndexView(generic.TemplateView):
 
 class DoacaoView(generic.CreateView):
     form_class = DoacaoForm
-    template_name = 'form.html'
+    template_name = 'base_form.html'
 
     def get_initial(self):
         return {
@@ -35,7 +35,7 @@ class DoacaoView(generic.CreateView):
 class PagamentoView(generic.UpdateView):
     form_class = PagamentoForm
     model = Doacao
-    template_name = 'form.html'
+    template_name = 'pagamento_form.html'
 
     def get_queryset(self):
         qs = super().get_queryset()
