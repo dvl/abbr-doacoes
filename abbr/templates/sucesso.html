@@ -5,5 +5,31 @@
   <p>Sua doação foi recebida com sucesso.</p>
   {% if object.forma_pagamento == 'boleto' %}
     <p>Clique <a href="{{ object.boleto_url }}">aqui</a> para imprimir seu boleto.</p>
+  {% elif object.forma_pagamento == 'paypal' %}
+    <p>Você será redirecionado para o PayPal para finalizar seu pagamento.</p>
+
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" id="paypal" style="display: none">
+      <input type="hidden" name="cmd" value="_donations">
+      <input type="hidden" name="business" value="andreluiz0112-facilitator@gmail.com">
+      <input type="hidden" name="lc" value="US">
+      <input type="hidden" name="item_name" value="ABBR">
+      <input type="hidden" name="item_number" value="teste">
+      <input type="hidden" name="no_note" value="0">
+      <input type="hidden" name="amount" value="{{ object.valor_doacao|floatformat:"-2" }}">
+      <input type="hidden" name="currency_code" value="BRL">
+      <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+      <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+      <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif">
+    </form>
+  {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+  {% if object.forma_pagamento == 'paypal' %}
+    <script>
+      $(document).ready(function() {
+        $('#paypal').submit();
+      });
+    </script>
   {% endif %}
 {% endblock %}

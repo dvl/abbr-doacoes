@@ -3,16 +3,12 @@ from django.http import HttpResponseRedirect
 from django.views import generic
 
 from abbr.core.mundipagg import boleto_bancario, cartao_credito
-from abbr.doacoes.forms import DoacaoForm, IndexForm, PagamentoForm
+from abbr.doacoes.forms import DoacaoForm, PagamentoForm
 from abbr.doacoes.models import Doacao
 
 
 class IndexView(generic.TemplateView):
     template_name = 'index.html'
-
-    @property
-    def form(self):
-        return IndexForm()
 
 
 class DoacaoView(generic.CreateView):
@@ -21,14 +17,13 @@ class DoacaoView(generic.CreateView):
 
     def get_initial(self):
         return {
-            'valor_doacao': self.request.GET.get('valor_doacao'),
-            'forma_pagamento': self.request.GET.get('forma_pagamento'),
+            'forma_pagamento': self.kwargs.get('forma_pagamento'),
         }
 
     def get_form(self, form_class=None):
         form_class = super().get_form(form_class)
 
-        if self.request.GET.get('forma_pagamento') == Doacao.BOLETO_BANCARIO:
+        if self.request.GET.get('forma_pagamento') != Doacao.CARTAO_CREDITO:
             del form_class.fields['recorrencia']
 
         return form_class
@@ -50,13 +45,15 @@ class PagamentoView(generic.UpdateView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
 
-        if self.object.forma_pagamento == Doacao.BOLETO_BANCARIO:
+        if self.object.forma_pagamento in Doacao.BOLETO_BANCARIO:
             # vai direto para MundiPagg, os dados que já tenho em
             # self.object já são o bastante para gerar um boleto
             # bancário.
             self.object.resposta_gateway = boleto_bancario(self.object)
             self.object.save()
+            return HttpResponseRedirect(self.get_success_url())
 
+        elif self.object.forma_pagamento == Doacao.PAYPAL:
             return HttpResponseRedirect(self.get_success_url())
 
         return self.render_to_response(self.get_context_data())
@@ -87,3 +84,11 @@ class PagamentoView(generic.UpdateView):
 class SucessoView(generic.DetailView):
     model = Doacao
     template_name = 'sucesso.html'
+
+
+def webhook_mundipagg(request):
+    pass
+
+
+def webhook_paypal(request):
+    pass
