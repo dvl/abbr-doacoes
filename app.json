@@ -1,0 +1,64 @@
+{
+  "name": "ABBR Doações",
+  "description": "Sistema para coleta de doação para ABBR.",
+  "repository": "https://github.com/dvl/abbr-doacoes",
+  "success_url": "/",
+  "scripts": {
+    "postdeploy": "python manage.py migrate"
+  },
+  "env": {
+    "SECRET_KEY": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "DEBUG": {
+      "description": "",
+      "value": "True"
+    },
+    "ALLOWED_HOSTS": {
+      "description": "",
+      "value": ".localhost, .herokuapp.com"
+    },
+    "MUNDIPAGG_API_ENDPOINT": {
+      "description": "",
+      "value": "https://sandbox.mundipaggone.com/"
+    },
+    "MUNDIPAGG_API_ENVIRONMENT": {
+      "description": "",
+      "value": "1"
+    },
+    "MUNDIPAGG_API_KEY": {
+      "description": "",
+      "value": "ff0b5cd0-d55c-4d38-8ee2-60db913e309b"
+    },
+    "MUNDIPAGG_API_KEY": {
+      "description": "",
+      "value": "ff0b5cd0-d55c-4d38-8ee2-60db913e309b"
+    },
+    "MUNDIPAGG_BOLETO_BANCO": {
+      "description": "",
+      "value": "237"
+    },
+    "MUNDIPAGG_BOLETO_NUMERO_DOCUMENTO": {
+      "description": "",
+      "value": "12345678909"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
