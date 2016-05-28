@@ -12,6 +12,8 @@ class DoacaoAdmin(admin.ModelAdmin):
         'numero_documento',
         'valor_doacao',
         'forma_pagamento',
+        'enviado_gateway',
+        'status_pagamento',
         'recorrencia',
         'criado_em',
         'atualizado_em',

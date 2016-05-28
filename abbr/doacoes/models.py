@@ -72,6 +72,12 @@ class Doacao(models.Model):
         editable=False,
     )
 
+    notificacao_gateway = JSONField(
+        verbose_name='Notificação da Mundipagg',
+        null=True,
+        editable=False,
+    )
+
     criado_em = models.DateTimeField(
         verbose_name='Criado em',
         auto_now_add=True,
@@ -86,7 +92,27 @@ class Doacao(models.Model):
         verbose_name = 'doação'
         verbose_name_plural = 'doações'
 
+        ordering = (
+            '-criado_em',
+        )
+
         required_db_vendor = 'postgresql'
 
     def __str__(self):
         return '{}'.format(self.pk)
+
+    def boleto_url(self):
+        try:
+            return self.resposta_gateway['BoletoTransactionResultCollection'][0]['BoletoUrl']
+        except (KeyError, IndexError, TypeError):
+            return None
+
+    def status_pagamento(self):
+        try:
+            return self.notificacao_gateway['StatusNotification']['OrderStatus']
+        except (KeyError, IndexError, TypeError):
+            return 'Opened'
+
+    def enviado_gateway(self):
+        return self.resposta_gateway is not None
+    enviado_gateway.boolean = True

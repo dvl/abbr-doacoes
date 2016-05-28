@@ -4,21 +4,6 @@ from django.utils import timezone
 from abbr.doacoes.models import Doacao
 
 
-class IndexForm(forms.ModelForm):
-
-    class Meta:
-        model = Doacao
-
-        fields = (
-            'valor_doacao', 'forma_pagamento'
-        )
-
-        widgets = {
-            'valor_doacao': forms.NumberInput(attrs={'step': '1', 'required': True}),
-            'forma_pagamento': forms.Select(attrs={'required': True}),
-        }
-
-
 class DoacaoForm(forms.ModelForm):
 
     class Meta:
@@ -30,7 +15,7 @@ class DoacaoForm(forms.ModelForm):
         )
 
         widgets = {
-            'valor_doacao': forms.HiddenInput(),
+            'valor_doacao': forms.NumberInput(attrs={'step': '1'}),
             'forma_pagamento': forms.HiddenInput(),
         }
 

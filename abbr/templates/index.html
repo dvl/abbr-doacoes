@@ -2,22 +2,22 @@
 
 {% load staticfiles %}
 
-{% block extra_js %}
-<script>
-  $(document).ready(function() {
-    $('#id_doacao_form').on('submit', function(e) {
-      if ($('#id_forma_pagamento').val() == 'paypal') {
-        window.location.href = 'https://www.paypal.com/';
-        e.preventDefault();
-      }
-    });
-  });
-</script>
-{% endblock %}
-
 {% block content %}
-  <form action="{% url 'doacoes:inicio' %}" method="GET" id="id_doacao_form">
-    {{ view.form.as_p }}
-    <input type="submit" value="Doar">
-  </form>
+  <ul class="type-payment">
+    <li>
+      <a href="{% url 'doacoes:inicio' forma_pagamento='cartao' %}">
+        <img src="{% static 'img/credit-card.svg' %}" alt="Cartão de Crédito" />
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'doacoes:inicio' forma_pagamento='boleto' %}">
+        <img src="{% static 'img/barcode.svg' %}" alt="Boleto" />
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'doacoes:inicio' forma_pagamento='paypal' %}">
+        <img src="{% static 'img/paypal.svg' %}" alt="PayPal" />
+      </a>
+    </li>
+  </ul>
 {% endblock %}
