@@ -37,6 +37,52 @@ class DoacaoAdmin(admin.ModelAdmin):
         'recorrencia',
     )
 
+    fieldsets = (
+        (None, {
+            'fields': (
+                'id',
+                'criado_em',
+                'atualizado_em',
+            )
+        }),
+        ('Dados do Doador', {
+            'fields': (
+                'nome',
+                'email',
+                'tipo_documento',
+                'numero_documento',
+            )
+        }),
+        ('Dados da Doação', {
+            'fields': (
+                'valor_doacao',
+                'forma_pagamento',
+                'recorrencia',
+            )
+        }),
+        ('Informação do gateway de pagamento', {
+            'fields': (
+                'resposta_gateway',
+                'notificacao_gateway',
+            ),
+            'classes': (
+                'collapse',
+            ),
+        }),
+    )
+
+    class Media:
+        css = {
+            'all': (
+                '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css',
+            )
+        }
+
+        js = (
+            '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js',
+            'js/admin.js',
+        )
+
     def get_readonly_fields(self, request, obj=None):
         return [f.name for f in self.model._meta.fields]
 
