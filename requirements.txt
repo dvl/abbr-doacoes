@@ -4,6 +4,7 @@ dj-database-url==0.4.1
 django-floppyforms==1.6.2
 django-debug-toolbar==1.4
 django-extensions==1.6.7
+sendgrid-django==2.0.0
 
 -e git+https://github.com/dvl/mundipagg-one-python.git@31a4466c59dbc93fcd01fefc0b98c9a2575c88b2#egg=mundipagg_one
 python-decouple==3.0
@@ -14,3 +15,4 @@ whitenoise==3.1
 
 remote-pdb==1.2.0
 xmltodict==0.10.1
+
