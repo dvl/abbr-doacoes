@@ -22,7 +22,7 @@ Da maneira manual:
     $ make install
     $ make up
     
-## Local
+## Manual
 
     $ sudo -u postgres createdb abbr
     $ cp .env-example .env
