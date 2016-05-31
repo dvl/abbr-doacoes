@@ -153,6 +153,8 @@ EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.conso
 
 EMAIL_SUBJECT_PREFIX = '[ABBR] '
 
+DEFAULT_FROM_EMAIL = 'doacoes@abbr.org.br'
+
 SENDGRID_API_KEY = config('SENDGRID_API_KEY', default='SG.8_XXX')
 
 # Logging
