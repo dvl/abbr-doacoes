@@ -149,12 +149,11 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # E-mail
 # https://docs.djangoproject.com/en/1.9/topics/email/
 
-EMAIL_BACKEND = 'sgbackend.SendGridBackend'
+EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
 
 EMAIL_SUBJECT_PREFIX = '[ABBR] '
 
-SENDGRID_USER = config('SENDGRID_USER', default='user')
-SENDGRID_PASSWORD = config('SENDGRID_PASSWORD', default='pass')
+SENDGRID_API_KEY = config('SENDGRID_API_KEY', default='SG.8_XXX')
 
 # Logging
 # https://docs.djangoproject.com/en/1.9/topics/logging
