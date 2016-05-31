@@ -154,7 +154,7 @@ EMAIL_BACKEND = 'sgbackend.SendGridBackend'
 EMAIL_SUBJECT_PREFIX = '[ABBR] '
 
 SENDGRID_USER = config('SENDGRID_USER', default='user')
-SENDGRID_PASSWORD = config('SENDGRID_PASSWORD', default'pass')
+SENDGRID_PASSWORD = config('SENDGRID_PASSWORD', default='pass')
 
 # Logging
 # https://docs.djangoproject.com/en/1.9/topics/logging
