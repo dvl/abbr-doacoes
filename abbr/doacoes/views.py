@@ -1,9 +1,10 @@
 import xmltodict
 
 from django.core.urlresolvers import reverse_lazy
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
 
 from abbr.core.mundipagg import pagamento_boleto, pagamento_cartao
 from abbr.doacoes.forms import DoacaoForm, PagamentoForm
@@ -93,11 +94,16 @@ class SucessoView(generic.DetailView):
 
 
 @csrf_exempt
+@require_http_methods(['POST'])
 def webhook_mundipagg(request):
     # essa porra é orgão público para em pleno ano de 2016 usar XML?
     # xml = request.body
     # o formato abaixo é tão bosta que o POSTMAN não sabe enviar um XML assim...
-    xml = request.POST['xmlStatusNotification']
+    try:
+        xml = request.POST['xmlStatusNotification']
+    except KeyError:
+        return HttpResponse(status=412)
+
     better_data_structure_than_xml = xmltodict.parse(xml)
 
     reference = better_data_structure_than_xml['StatusNotification']['OrderReference']
