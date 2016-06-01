@@ -97,7 +97,7 @@ def webhook_mundipagg(request):
     # essa porra é orgão público para em pleno ano de 2016 usar XML?
     # xml = request.body
     # o formato abaixo é tão bosta que o POSTMAN não sabe enviar um XML assim...
-    xml = request.body.POST['xmlStatusNotification']
+    xml = request.POST['xmlStatusNotification']
     better_data_structure_than_xml = xmltodict.parse(xml)
 
     reference = better_data_structure_than_xml['StatusNotification']['OrderReference']

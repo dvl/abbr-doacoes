@@ -149,7 +149,13 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # E-mail
 # https://docs.djangoproject.com/en/1.9/topics/email/
 
+EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
+
 EMAIL_SUBJECT_PREFIX = '[ABBR] '
+
+DEFAULT_FROM_EMAIL = 'doacoes@abbr.org.br'
+
+SENDGRID_API_KEY = config('SENDGRID_API_KEY', default='SG.8_XXX')
 
 # Logging
 # https://docs.djangoproject.com/en/1.9/topics/logging
@@ -187,3 +193,4 @@ MUNDIPAGG_API_KEY = config('MUNDIPAGG_API_KEY', default='ff0b5cd0-d55c-4d38-8ee2
 
 MUNDIPAGG_BOLETO_BANCO = config('MUNDIPAGG_BOLETO_BANCO', default='237')
 MUNDIPAGG_BOLETO_NUMERO_DOCUMENTO = config('MUNDIPAGG_BOLETO_NUMERO_DOCUMENTO', default='12345678901')
+
