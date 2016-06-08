@@ -104,7 +104,11 @@ def webhook_mundipagg(request):
     except KeyError:
         return HttpResponse(status=412)
 
-    better_data_structure_than_xml = xmltodict.parse(xml)
+    try:
+        better_data_structure_than_xml = xmltodict.parse(xml)
+    except:
+        # Sim, sem especificar, o XML da MundiPagg não é NEM UM POUCO CONFIÁVEL
+        return HttpResponse(status=412)
 
     reference = better_data_structure_than_xml['StatusNotification']['OrderReference']
 
