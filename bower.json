@@ -18,6 +18,6 @@
   "dependencies": {
     "supersized": "*",
     "jquery": "^2.2.4",
-    "jquery-maskmoney": "^3.0.2"
+    "elegant-icons": "*"
   }
 }
