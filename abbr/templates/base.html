@@ -12,13 +12,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <link rel="stylesheet" href="{% static 'supersized/slideshow/css/supersized.css' %}" type="text/css" media="screen" id="pagestyle" />
+  <link rel="stylesheet" href="{% static 'elegant-icons/css/style.css' %}" type="text/css" media="screen" id="pagestyle">
   <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="screen" id="pagestyle" />
 
   <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
+  <div class="header_container">
+    <a id="logo_main" href="{% url 'doacoes:index' %}" class="header_logo" title="">
+      <h1><img src="{% static 'img/logo_conto_com_voce.png' %}" alt="ABBR" /></h1>
+    </a>
+    <a class="menu_button" id="menu_button" title="">
+      <span aria-hidden="true" data-icon="&#x61;"></span>
+    </a>
+  </div>
+
   <div id="image-poster"></div>
+
   <div class="slideshow-pattern"></div>
 
   <div class="main_div">
@@ -32,10 +43,48 @@
     </div>
   </div>
 
-<script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
-<script src="{% static 'supersized/slideshow/js/supersized.3.2.7.min.js' %}"></script>
-<script src="{% static 'jquery-maskmoney/dist/jquery.maskMoney.min.js' %}"></script>
-<script src="{% static 'js/scripts.js' %}"></script>
-{% block extra_js %}{% endblock %}
+  <div class="nav_container" id="nav_container">
+    <a class="nav_about" id="nav_about" title="">
+      <p><span aria-hidden="true" data-icon="&#xe08b;"></span><br/>SOBRE</p>
+    </a>
+
+    <a class="nav_contact" id="nav_contact" title="">
+      <p><span aria-hidden="true" data-icon="&#xe076;"></span><br/>CONTATO</p>
+    </a>
+
+    <div class="nav_content_container">
+      <div class="nav_about_content">
+        <h3>Sobre</h3>
+        <hr>
+        <p>
+          Nós estamos a mais de 60 anos ajudando a vida de pessoas em reabilitação física. Somos uma equipe de profissionais multidisciplinares como: médicos, enfermeiros, terapeutas, psicólogos, artistas, artesãos, educadores e toda a equipe administrativa, que fica diariamente de coração aberto recebendo mais de 1 mil pessoas e atendendo a todos da melhor forma possível. Estamos organizados em duas grandes áreas:<br/>
+- centro de reabilitação: formado por 6 unidades: infantojuvenil / cranioencefálica / amputados / raquimedular / mielopatias / fisiatria.<br/>
+- oficina ortopédica: fabricação de órteses, próteses de membros inferiores e superiores,calçados e palmilhas ortopédias, aparelhos de auxílio a locomoção como cadeiras de rodas, cadeiras de banhos, muletas e andadores.
+        </p>
+        <h4>Ninguem faz reabilitação como a ABBR.</h4>
+      </div>
+
+      <div class="nav_contact_content">
+        <h3>Contato</h3>
+        <hr>
+        <p>Se você quer tirar alguma dúvida, conhecer melhor o nosso trabalho ou nos fazer uma visita. Entre em contato conosco!</p>
+        <p>Se você esta interessado em uma possível parceria ou em fazer algum projeto conosco. Também entre em contato consoco!</p>
+
+        <p>Nossos contatos:</p>
+        <ul>
+          <li><p><span aria-hidden="true" data-icon="&#xe00b;"></span>Telefone: 21 XXXXX- XXX</p></li>
+          <li><p><span aria-hidden="true" data-icon="&#x76;"></span>Email: XXXX XXXX@XXX.ORG.BR</p></li>
+        </ul>
+        <a class="nav_about_close" id="nav_about_close" title=""><span aria-hidden="true" data-icon="&#x4d;"></span></a>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'supersized/slideshow/js/supersized.3.2.7.min.js' %}"></script>
+  <script src="{% static 'js/scripts.js' %}"></script>
+  <script src="{% static 'js/plugins.js' %}"></script>
+
+  {% block extra_js %}{% endblock %}
 </body>
 </html>
