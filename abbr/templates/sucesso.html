@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
 {% block content %}
   <h2>Obrigado!</h2>
-  <p>Sua doação foi recebida com sucesso.</p>
+  <p>Estamos muito felizes com a sua contribuição nessa causa :)</p>
+  <p>você com certeza vai mudar a vida de alguma pessoa com essa doação!</p>
+
   {% if object.forma_pagamento == 'boleto' %}
     <p>Clique <a href="{{ object.boleto_url }}">aqui</a> para imprimir seu boleto.</p>
   {% elif object.forma_pagamento == 'paypal' %}
-    <p>Você será redirecionado para o PayPal para finalizar seu pagamento.</p>
+    <p>Clique <a href="javascript:void(0);" id="submit">aqui</a> para ser redirecionado para o PayPal e concluir seu pagamento.</p>
 
     <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" id="paypal" style="display: none">
       <input type="hidden" name="cmd" value="_donations">
@@ -23,13 +27,30 @@
       <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif">
     </form>
   {% endif %}
+
+  <p>A ABBR é + com você</p>
+
+  <ul class="type-payment">
+    <li>
+      <a href="javascript:fbShare();">
+        <img src="{% static 'img/facebook.svg' %}" alt="Facebook" />
+      </a>
+    </li>
+    <li>
+      <a href="javascript:twitterShare();">
+        <img src="{% static 'img/twitter.svg' %}" alt="Twitter" />
+      </a>
+    </li>
+  </ul>
 {% endblock %}
 
 {% block extra_js %}
   {% if object.forma_pagamento == 'paypal' %}
     <script>
       $(document).ready(function() {
-        $('#paypal').submit();
+        $('#submit').on('click', function() {
+          $('#paypal').submit();
+        });
       });
     </script>
   {% endif %}
