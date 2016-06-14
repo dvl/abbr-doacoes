@@ -102,7 +102,7 @@ def webhook_mundipagg(request):
     try:
         xml = request.POST['xmlStatusNotification']
     except KeyError:
-        return HttpResponse(status=412)
+        return HttpResponse(status=400)
 
     try:
         better_data_structure_than_xml = xmltodict.parse(xml)
