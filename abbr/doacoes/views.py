@@ -108,7 +108,7 @@ def webhook_mundipagg(request):
         better_data_structure_than_xml = xmltodict.parse(xml)
     except:
         # Sim, sem especificar, o XML da MundiPagg não é NEM UM POUCO CONFIÁVEL
-        return HttpResponse(status=412)
+        return HttpResponse(status=400)
 
     reference = better_data_structure_than_xml['StatusNotification']['OrderReference']
 
